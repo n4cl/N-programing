@@ -85,5 +85,10 @@
         }
         return message['nomal'].replace(/\{userName\}/g, userName);
     }
-    console.log(assessment('不知火'));
+    // 雑なテスト
+    console.assert(assessment('不知火') === '不知火は良い名前です。', '診断に失敗しています。');
+    console.assert(assessment('吹雪') === '吹雪は普通の名前です。', '診断に失敗しています。');
+    console.assert(assessment('吹雪') === assessment('吹雪'), '診断に失敗しています。');
+    // 実行結果
+    console.log(assessment('吹雪'));
 })();
