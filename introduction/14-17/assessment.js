@@ -1,5 +1,7 @@
 (function(){
     'use strict';
+    // 良いと言われている画数
+    const good = [16, 23, 32];
     const kakusu = {
         1: '一ノ乙くしつのへフヘレっー',
         2: '二七八九十丁乂乃了人入几刀力匕卜又いうアイこカクコスセソてとトナニヌひハヒめマムメヤユりるろラリルワんンぺプペぃぅァィャュ',
@@ -55,12 +57,12 @@
     }
 
     /**
-    * 名前の文字列を渡すと総画数を返す関数
+    * 名前の文字列を渡すと名前の良さを判定する
     * @param {string} userName ユーザーの名前
-    * @return {string} 総画数
+    * @return {string} 診断結果
     */
     function assessment(userName) {
-        // 全文字のコード番号を取得してそれを足し合わせる
+        // 全文字のコード画数を取得してそれを足し合わせる
         let total = 0;
         let n = 0;
         for (let i = 0; i < userName.length; i++) {
@@ -70,7 +72,18 @@
             }
             total += n;
         }
-        alert(total);
+
+        // 診断処理
+        let message = {
+            'good': '{userName}は良い名前です。',
+            'nomal': '{userName}は普通の名前です。'
+        };
+        for (let i = 0; i < good.length; i++) {
+            if (good[i] === total) {
+                return message['good'].replace(/\{userName\}/g, userName);
+            }
+        }
+        return message['nomal'].replace(/\{userName\}/g, userName);
     }
     console.log(assessment('不知火'));
 })();
