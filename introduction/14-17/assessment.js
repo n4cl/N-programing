@@ -1,5 +1,31 @@
 (function(){
     'use strict';
+
+    const inpUserName = document.getElementById('user-name');
+    const btnAssessment = document.getElementById('assessment');
+    const divResultArea = document.getElementById('result-area');
+    const divTweetArea = document.getElementById('tweet-area');
+
+    // 診断結果を描画する
+    btnAssessment.onclick = () => {
+        name = inpUserName.value;
+        if (name.length === 0) {
+            return;
+        }
+
+        // 診断結果表示エリアの子要素を全て削除する
+        removeAllChldeln(divResultArea);
+
+        const header = document.createElement('h3');
+        header.innerText = '診断結果';
+        divResultArea.appendChild(header);
+
+        const paragraph = document.createElement('p');
+        const result = assessment(name);
+        paragraph.innerText = result;
+        divResultArea.appendChild(paragraph);
+    }
+
     // 良いと言われている画数
     const good = [16, 23, 32];
     const kakusu = {
@@ -41,6 +67,16 @@
         36: '齉'
     };
 
+    /**
+     * 全ての子要素を削除
+     * @param {HTMLElement} element HTMLの要素
+     */
+    function removeAllChldeln(element){
+        // 子要素の削除
+        while (element.firstChild) {
+            element.removeChild(divResultArea.firstChild);
+        }
+    }
     /**
     * 文字を渡すと画数を返す関数
     * @param {string} chr 文字
@@ -85,10 +121,4 @@
         }
         return message['nomal'].replace(/\{userName\}/g, userName);
     }
-    // 雑なテスト
-    console.assert(assessment('不知火') === '不知火は良い名前です。', '診断に失敗しています。');
-    console.assert(assessment('吹雪') === '吹雪は普通の名前です。', '診断に失敗しています。');
-    console.assert(assessment('吹雪') === assessment('吹雪'), '診断に失敗しています。');
-    // 実行結果
-    console.log(assessment('吹雪'));
 })();
