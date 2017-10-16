@@ -24,6 +24,15 @@
         const result = assessment(name);
         paragraph.innerText = result;
         divResultArea.appendChild(paragraph);
+
+        // Tweetリンクの作成
+        const anchor = document.createElement('a');
+        const hrefValue = 'https://twitter.com/intent/tweet?button_hashtag=%E5%A7%93%E5%90%8D%E5%88%A4%E6%96%AD&text=' + encodeURIComponent(result);
+        anchor.setAttribute('href', hrefValue);
+        anchor.className = 'twitter-hashtag-button';
+        anchor.innerText = 'Tweet #%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E3%81%84%E3%81%84%E3%81%A8%E3%81%93%E3%82%8D';
+        divTweetArea.appendChild(anchor);
+        twttr.widgets.load();
     }
 
     // 良いと言われている画数
