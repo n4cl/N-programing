@@ -35,6 +35,13 @@
         twttr.widgets.load();
     }
 
+    // Enterキー押下時に診断
+    inpUserName.onkeydown = (event) => {
+        if (event.keyCode === 13) {
+            btnAssessment.onclick();
+        }
+    }
+
     // 良いと言われている画数
     const good = [16, 23, 32];
     const kakusu = {
